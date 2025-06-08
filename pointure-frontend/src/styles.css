@@ -52,3 +52,19 @@
   pointer-events: none;
   z-index: 0;
 }
+
+.radial-glow-top-left {
+  position: absolute;
+  top: -10rem;
+  left: -30px;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top left, 
+    rgba(236, 72, 153, 0.4) 0%, 
+    rgba(139, 92, 246, 0.3) 100%, 
+    transparent 70%);
+  filter: blur(25px);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+}
