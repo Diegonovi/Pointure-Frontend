@@ -11,7 +11,16 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'products/:slug', component: ProductDetailComponent },
+      {
+        path: 'products/:slug',
+        loadComponent: () =>
+          import('./product-detail/product-detail.component').then(
+            (m) => m.ProductDetailComponent
+          ),
+        data: {
+          renderMode: 'client',
+        },
+      },
     ],
   },
   {
