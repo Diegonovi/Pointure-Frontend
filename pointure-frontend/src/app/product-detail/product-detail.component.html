@@ -1,20 +1,29 @@
+@if (product == null || product == undefined){
+<div
+  class="fixed inset-0 flex items-center justify-center bg-white z-50"
+>
+  <div
+    class="animate-spin w-16 h-16 border-4 border-primary border-t-transparent rounded-full"
+  ></div>
+</div>
+} @else {
 <div class="max-w-6xl mx-auto py-8">
-  <div class="flex flex-col md:flex-row gap-8 px-4">
+  <div class="flex flex-col md:flex-row gap-8 p-4 bg-white rounded-2xl mb-8">
     <!-- Image viewer column -->
     <div class="md:w-1/2 flex flex-col items-center">
       <!-- Main image -->
       <img
-        [src]="selectedImage || product?.listingImages?.[0] || 'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'"
-        alt="{{ product?.name || 'Producto sin nombre' }}"
+        [src]="selectedImage || product.listingImages[0] || 'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'"
+        alt="{{ product.name || 'Producto sin nombre' }}"
         class="w-full max-h-[400px] object-contain rounded-lg mb-4"
       />
 
       <!-- Thumbnails -->
       <div class="flex gap-4 overflow-x-auto hide-scrollbar">
-        @for (img of product?.listingImages || []; track $index) {
+        @for (img of product.listingImages || []; track $index) {
         <img
           [src]="img"
-          [alt]="product?.name + ' image ' + ($index + 1)"
+          [alt]="product.name + ' image ' + ($index + 1)"
           (click)="selectedImage = img"
           [class.border-4]="selectedImage === img"
           class="w-20 h-20 object-cover rounded cursor-pointer transition-border duration-300 border-transparent hover:border-primary"
@@ -26,22 +35,22 @@
     <!-- Details column -->
     <div class="md:w-1/2 flex flex-col justify-center text-gray-800">
       <h1 class="text-4xl font-bold mb-2">
-        {{ product?.name || "Producto sin nombre" }}
+        {{ product.name }}
       </h1>
       <p class="text-lg text-indigo-600 mb-6">
-        {{ product?.brandName || "Marca desconocida" }}
+        {{ product.brandName }}
       </p>
       <p class="mb-6 whitespace-pre-wrap">
-        {{ product?.description || "Sin descripción disponible" }}
+        {{ product.description }}
       </p>
       <p class="text-3xl font-extrabold text-primary mb-8">
-        {{ product?.price ?? "Precio no disponible" }}€
+        {{ product.price }}€
       </p>
     </div>
   </div>
 
   <!-- Similar products section -->
-  <h2 class="text-2xl font-bold text-center text-black mb-6">Dibujo</h2>
+  <h2 class="text-2xl font-bold text-center text-black mb-6">Productos similares</h2>
   <div class="relative bg-white shadow-md rounded-xl p-6">
     <div class="flex gap-4 overflow-x-auto hide-scrollbar">
       @for (product of products || []; track $index) {
@@ -93,3 +102,4 @@
     </div>
   </div>
 </div>
+}
