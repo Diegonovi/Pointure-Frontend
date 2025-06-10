@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 import { Product } from '../models/Product';
 import { Page } from '../models/Page';
@@ -13,14 +13,14 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(
+  async getProducts(
     pageNumber: number = 1,
     pageSize: number = 30,
     name: string = '',
     categoryId?: number,
     brandName: string = '',
     priceSortingDirection?: 'asc' | 'desc' | null
-  ): Observable<Page<Product>> {
+  ): Promise<Page<Product>> {
     let params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString())
@@ -34,7 +34,21 @@ export class ProductService {
       params = params.set('priceSortingDirection', priceSortingDirection);
     }
 
-    return this.http.get<Page<Product>>(`${this.baseUrl}/list`, { params });
+    try {
+      return await firstValueFrom(this.http.get<Page<Product>>(`${this.baseUrl}/list`, { params }));
+    } catch (error) {
+      console.error("Failed to fetch products", error);
+      return { data: [], totalItems: 0 , pageSize: pageSize, pageNumber: pageNumber, totalPages: 0};
+    }
+  }
+
+  async getProductBySlug(slug: string): Promise<Product | null> {
+    try {
+      return await firstValueFrom(this.http.get<Product>(`${this.baseUrl}/${slug}`));
+    } catch (error) {
+      console.error("Failed to fetch product", error);
+      return null;
+    }
   }
 }
 

@@ -59,70 +59,65 @@
   </div>
 
   <h2 class="text-2xl font-bold text-center text-black mb-6">
-    Featured Products
+    Dibujo
   </h2>
-  <div class="relative bg-white shadow-md rounded-xl p-6">
-    <div class="flex gap-4 overflow-x-auto">
-      @for (product of products; track $index) { @if ($index == products.length
-      - 1) {
-      <div
-        class="card shadow-gray-100 bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
-      >
-        <figure class="w-full aspect-square overflow-hidden">
-          <img
-            class="w-full h-full object-cover"
-            [src]="
-              product.listingImages[0] ||
-              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-            "
-            [alt]="product.name"
-          />
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">{{ product.name }}</h2>
-          <p class="text-lg font-semibold text-primary">${{ product.price }}</p>
-          <div class="card-actions justify-center">
-            <button class="btn btn-primary">Ver mas</button>
+<div class="relative bg-white shadow-md rounded-xl p-6">
+  <div class="flex gap-4 overflow-x-auto hide-scrollbar">
+    @for (product of products; track $index) {
+      @if ($index == products.length - 1) {
+        <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
+          <a [routerLink]="['/products', product.slug]" class="block">
+            <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+              <img
+                class="w-full h-full object-cover"
+                [src]="product.listingImages[0] || 'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'"
+                [alt]="product.name"
+              />
+            </figure>
+          </a>
+          <div class="card-body" style="padding: 0;">
+            <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+              <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
+            </a>
+            <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+            <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
           </div>
         </div>
-      </div>
       } @else {
-      <div
-        class="card bg-base-100 border-r-2 border-gray-300 min-w-[220px] max-w-[220px] flex-shrink-0 pr-4"
-      >
-        <figure class="w-full aspect-square overflow-hidden">
-          <img
-            class="w-full h-full object-cover"
-            [src]="
-              product.listingImages[0] ||
-              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-            "
-            [alt]="product.name"
-          />
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">{{ product.name }}</h2>
-          <p class="text-lg font-semibold text-primary">${{ product.price }}</p>
-          <div class="card-actions justify-center">
-            <button class="btn btn-primary">Ver mas</button>
+        <div class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
+          <a [routerLink]="['/products', product.slug]" class="block">
+            <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+              <img
+                class="w-full h-full object-cover"
+                [src]="product.listingImages[0] || 'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'"
+                [alt]="product.name"
+              />
+            </figure>
+          </a>
+          <div class="card-body" style="padding: 0;">
+            <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+              <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
+            </a>
+            <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+            <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
           </div>
         </div>
-      </div>
-      } } @empty {
-      <div class="text-center text-gray-500 w-full justify-center">
-        No products available at the moment.
-      </div>
       }
-    </div>
-    @if (products.length != 0) {
-    <div class="mt-8 flex justify-center">
-      <button class="btn btn-outline btn-primary">Show More</button>
-    </div>
+    } @empty {
+      <div class="text-center text-gray-500 w-full justify-center">
+        No hay productos disponibles en este momento.
+      </div>
     }
   </div>
+  @if (products.length != 0) {
+    <div class="mt-8 flex justify-center">
+      <button class="btn btn-outline btn-primary">Mostrar más</button>
+    </div>
+  }
+</div>
 
   <h2 class="text-2xl font-bold text-center text-black m-6">
-    Featured Products
+    Productos Destacados
   </h2>
   <div class="relative bg-white shadow-md rounded-xl p-6">
     <!-- Scrollable Card Row -->
