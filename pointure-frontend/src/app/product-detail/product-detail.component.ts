@@ -21,7 +21,9 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   public products: Product[] = [];
 
@@ -36,8 +38,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   async loadProduct(slug: string) {
-    this.product = await this.productService.getProductBySlug(slug);
-    if (!this.product) {
+    this.product = await this.productService.getProductBySlug(slug);    if (!this.product) {
       this.router.navigate(['/404']);
     } else {
       this.selectedImage = this.product.listingImages[0];
