@@ -1,6 +1,5 @@
 export const environment = {
-  production: false,
-  products: 'api/products',
-  users: 'api/users',
-  baseUrl: 'http://localhost:5004',
+  products: 'products',
+  users: 'users',
+  baseUrl: 'https://pointure.duckdns.org/api/',
 };
