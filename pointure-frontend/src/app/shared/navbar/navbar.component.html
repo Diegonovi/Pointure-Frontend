@@ -1,0 +1,87 @@
+<div class="relative z-10" style="padding: 1.5rem;">
+  <!-- Glow Layer -->
+  <div class="radial-glow-left hidden md:block"></div>
+  <div class="radial-glow-center md:hidden"></div>
+  <!-- NAVBAR -->
+  <div
+    class="navbar rounded-4xl px-4 relative z-10 border-2 border-white"
+    style="
+      background: rgba(255 255 255 / 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    "
+  >
+    <!-- Mobile Menu Button -->
+    <div class="flex-none lg:hidden">
+      <button
+        class="btn btn-square btn-ghost"
+        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="flex-1 flex justify-center lg:justify-start items-center space-x-4"
+    >
+      <!-- Logo -->
+      <a href="/">
+        <img src="assets/logo_black.png" alt="Pointure Logo" class="h-8" />
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden lg:flex space-x-4">
+        <a href="/" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">Home</a>
+        <a href="/products" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">Products</a>
+        <a href="/about" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">About</a>
+        <a href="/contact" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">Contact</a>
+      </div>
+    </div>
+
+    <input
+      type="text"
+      placeholder="Search"
+      class="hidden lg:block input rounded-4xl w-80 focus:outline-none focus:ring-0"
+    />
+  </div>
+
+  <!-- Mobile Nav Links -->
+  <div id="mobile-menu" class="lg:hidden hidden shadow-md bg-white-100 relative z-10">
+    <div
+      class="bg-base-100 rounded-box shadow-md mt-2 w-full max-w-screen-xl mx-auto px-4 py-6 space-y-2"
+    >
+      <ul class="space-y-2">
+        <li>
+          <a href="/" class="block btn btn-ghost w-full text-left">Home</a>
+        </li>
+        <li>
+          <a href="/products" class="block btn btn-ghost w-full text-left"
+            >Products</a
+          >
+        </li>
+        <li>
+          <a href="/about" class="block btn btn-ghost w-full text-left"
+            >About</a
+          >
+        </li>
+        <li>
+          <a href="/contact" class="block btn btn-ghost w-full text-left"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
