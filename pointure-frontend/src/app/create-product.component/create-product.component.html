@@ -5,38 +5,38 @@
     <h2 class="text-2xl font-bold text-center mb-6">Crear Producto</h2>
 
     <!-- Image Upload Section -->
-    <div
-      class="mb-6 flex overflow-x-auto space-x-4 p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)] rounded-2xl bg-gray-100"
-    >
-      @for (image of images.controls; track image) {
-      <div
-        class="relative w-24 h-24 rounded-xl overflow-hidden shadow-inner bg-white flex items-center justify-center"
-      >
-        <img
-          [src]="image.value"
-          alt="Product Image"
-          class="object-cover w-full h-full"
-        />
-        <button
-          (click)="removeImage(images.controls.indexOf(image))"
-          class="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center shadow-md transition"
-          title="Eliminar"
-        >
-          ✕
-        </button>
-      </div>
-      }
 
-      <!-- Upload Button -->
+    <div
+      class="mb-6 flex overflow-x-auto space-x-4 p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)] rounded-2xl bg-gray-100 hide-scrollbar"
+    >
+      @for (image of imagePreviews; track $index) {
+      <ng-container>
+        <div
+          class="relative w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden shadow-inner bg-white flex items-center justify-center"
+        >
+          <img
+            [src]="image"
+            alt="Product Image"
+            class="object-cover w-full h-full"
+          />
+          <button
+            (click)="removeImage($index)"
+            class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md transition"
+            title="Eliminar"
+          >
+            ✕
+          </button>
+        </div>
+      </ng-container>
+      } @if (imagePreviews.length < maxImages) {
       <label
-        class="w-24 h-24 flex items-center justify-center rounded-xl bg-gray-300 border-2 border-gray-400 hover:bg-gray-400 text-white cursor-pointer shadow-inner transition duration-200"
-        [class.opacity-50]="images.length >= maxImages"
+        class="w-32 h-32 flex-shrink-0 flex items-center justify-center rounded-xl bg-gray-300 border-2 border-gray-400 hover:bg-gray-400 text-white cursor-pointer shadow-inner transition duration-200"
         title="Subir imagen"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="32"
+          height="32"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -51,14 +51,13 @@
           type="file"
           accept="image/*"
           (change)="addImage($event)"
-          [disabled]="images.length >= maxImages"
           hidden
         />
       </label>
+      }
     </div>
-
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="mb-4">
           <label class="block text-sm font-medium">Nombre</label>
           <input
@@ -105,6 +104,29 @@
             formControlName="stock"
             class="w-full rounded-full bg-white/70 px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition"
           />
+        </div>
+      </div>
+
+      <!-- Color Selection -->
+      <div class="mb-6">
+        <label class="block mb-2 font-semibold text-sm text-gray-700">
+          Colores
+        </label>
+        <div class="flex flex-wrap gap-2">
+          @for (color of colors; track color.id) {
+          <button
+            type="button"
+            (click)="toggleColorSelection(color.id)"
+            [style.backgroundColor]="color.hexCode"
+            [ngStyle]="{
+              boxShadow: productForm.value.colors.includes(color.id)
+                ? '0 0 0 3px ' + color.hexCode + 'aa'
+                : 'inset -1px -1px 4px rgba(0,0,0,0.1), inset 1px 1px 4px rgba(255,255,255,0.3)'
+            }"
+            class="w-8 h-8 rounded-full border-none transition-all duration-150"
+            [attr.aria-label]="color.name"
+          ></button>
+          }
         </div>
       </div>
 
