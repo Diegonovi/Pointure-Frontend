@@ -21,6 +21,16 @@ export const routes: Routes = [
           renderMode: 'client',
         },
       },
+      {
+        path: 'categories/:categoryName',
+        loadComponent: () =>
+          import('./category/category.component').then(
+            (m) => m.CategoryComponent
+          ),
+        data: {
+          renderMode: 'client',
+        },
+      },
     ],
   },
   {
