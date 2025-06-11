@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FlashMessageService } from '../services/flashmessage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,18 @@ export class LoginComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/dashboard']);
     }
+
+    this.errorMessage = this.flashMessageService.getMessage();
   }
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router, 
+    private flashMessageService: FlashMessageService
+  ) {
+    this.errorMessage = null;
     this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]

@@ -5,7 +5,6 @@
     <h2 class="text-2xl font-bold text-center mb-6">Crear Producto</h2>
 
     <!-- Image Upload Section -->
-
     <div
       class="mb-6 flex overflow-x-auto space-x-4 p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)] rounded-2xl bg-gray-100 hide-scrollbar"
     >
@@ -116,10 +115,10 @@
           @for (color of colors; track color.id) {
           <button
             type="button"
-            (click)="toggleColorSelection(color.id)"
+            (click)="toggleColorFilter(color.id)"
             [style.backgroundColor]="color.hexCode"
             [ngStyle]="{
-              boxShadow: productForm.value.colors.includes(color.id)
+              boxShadow: selectedColors.includes(color.id)
                 ? '0 0 0 3px ' + color.hexCode + 'aa'
                 : 'inset -1px -1px 4px rgba(0,0,0,0.1), inset 1px 1px 4px rgba(255,255,255,0.3)'
             }"
@@ -129,7 +128,6 @@
           }
         </div>
       </div>
-
       <!-- Description -->
       <div class="mb-4">
         <label class="block text-sm font-medium">Descripción</label>

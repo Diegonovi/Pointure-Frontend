@@ -1,247 +1,261 @@
 <div class="px-2">
-  <h2 class="text-2xl font-bold text-center text-black mb-4">Categories</h2>
+  <h2 class="text-2xl font-bold text-center text-black mb-4">Categorías</h2>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-6">
-    <!-- Card 1 -->
-    <div
-      class="relative h-40 rounded-xl overflow-hidden text-white bg-pink-500/70 border-2 border-pink-500 group cursor-pointer"
+    <a
+      routerLink="/categories/drawing"
+      class="relative h-40 rounded-xl overflow-hidden text-white bg-pink-500/70 border-2 border-pink-500 group cursor-pointer flex flex-col justify-center items-center text-xl font-bold transition-colors duration-300"
     >
-      <div class="flex items-center justify-center h-full text-xl font-bold">
-        Art
-      </div>
+      Dibujo
       <div
         class="absolute inset-0 bg-pink-700/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4 text-sm"
       >
-        Discover painting, drawing, and creative supplies.
+        Explora nuestra amplia gama de materiales de dibujo profesional, desde
+        lápices de grafito hasta carboncillos y pasteles. Perfecto para artistas
+        de todos los niveles.
       </div>
-    </div>
+    </a>
 
-    <!-- Card 2 -->
-    <div
-      class="relative h-40 rounded-xl overflow-hidden text-white bg-blue-500/70 border-2 border-blue-500 group cursor-pointer"
+    <a
+      routerLink="/categories/painting"
+      class="relative h-40 rounded-xl overflow-hidden text-white bg-blue-500/70 border-2 border-blue-500 group cursor-pointer flex flex-col justify-center items-center text-xl font-bold transition-colors duration-300"
     >
-      <div class="flex items-center justify-center h-full text-xl font-bold">
-        Tech
-      </div>
+      Pintura
       <div
         class="absolute inset-0 bg-blue-700/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4 text-sm"
       >
-        Gadgets, devices, and innovations in technology.
+        Todo lo que necesitas para expresar tu creatividad: acrílicos, óleos,
+        acuarelas y más. Pigmentos de alta calidad para resultados
+        profesionales.
       </div>
-    </div>
+    </a>
 
-    <!-- Card 3 -->
-    <div
-      class="relative h-40 rounded-xl overflow-hidden text-white bg-green-500/70 border-2 border-green-500 group cursor-pointer"
+    <a
+      routerLink="/categories/surfaces"
+      class="relative h-40 rounded-xl overflow-hidden text-white bg-green-500/70 border-2 border-green-500 group cursor-pointer flex flex-col justify-center items-center text-xl font-bold transition-colors duration-300"
     >
-      <div class="flex items-center justify-center h-full text-xl font-bold">
-        Nature
-      </div>
+      Superficies
       <div
         class="absolute inset-0 bg-green-700/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4 text-sm"
       >
-        Everything about plants, animals, and the outdoors.
+        Diversos soportes para tu arte: lienzos, papeles especializados, tablas
+        y más. Encuentra la superficie perfecta para cada técnica.
       </div>
-    </div>
+    </a>
 
-    <!-- Card 4 -->
-    <div
-      class="relative h-40 rounded-xl overflow-hidden text-white bg-yellow-500/70 border-2 border-yellow-500 group cursor-pointer"
+    <a
+      routerLink="/categories/brushes"
+      class="relative h-40 rounded-xl overflow-hidden text-white bg-yellow-500/70 border-2 border-yellow-500 group cursor-pointer flex flex-col justify-center items-center text-xl font-bold transition-colors duration-300"
     >
-      <div class="flex items-center justify-center h-full text-xl font-bold">
-        Lifestyle
-      </div>
+      Pinceles
       <div
         class="absolute inset-0 bg-yellow-700/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4 text-sm"
       >
-        Fashion, health, and everyday living essentials.
+        Pinceles profesionales de diferentes formas, tamaños y materiales. Desde
+        sintéticos hasta pelo natural para cada tipo de pintura.
       </div>
-    </div>
+    </a>
   </div>
-
-  <h2 class="text-2xl font-bold text-center text-black mb-6">Dibujo</h2>
-  <div class="relative bg-white shadow-md rounded-xl p-6">
-    <div class="flex gap-4 overflow-x-auto hide-scrollbar">
-      @for (product of firstRowProducts; track $index) { @if ($index ==
-      firstRowProducts.length - 1) {
-      <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
-        <a [routerLink]="['/products', product.slug]" class="block">
-          <figure class="w-full aspect-square overflow-hidden cursor-pointer">
-            <img
-              class="w-full h-full object-cover"
-              [src]="
-                product.listingImages[0] ||
-                'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-              "
-              [alt]="product.name"
-            />
-          </figure>
+</div>
+<h2 class="text-2xl font-bold text-center text-black mb-6">Dibujo</h2>
+<div class="relative bg-white shadow-md rounded-xl p-6">
+  <div class="flex gap-4 overflow-x-auto hide-scrollbar">
+    @for (product of firstRowProducts; track $index) { @if ($index ==
+    firstRowProducts.length - 1) {
+    <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
+      <a [routerLink]="['/products', product.slug]" class="block">
+        <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+          <img
+            class="w-full h-full object-cover"
+            [src]="
+              product.listingImages[0] ||
+              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
+            "
+            [alt]="product.name"
+          />
+        </figure>
+      </a>
+      <div class="card-body" style="padding: 0">
+        <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+          <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
         </a>
-        <div class="card-body" style="padding: 0">
-          <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
-            <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
-          </a>
-          <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
-          <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
-        </div>
+        <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+        <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
       </div>
-      } @else {
-      <div
-        class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
-      >
-        <a [routerLink]="['/products', product.slug]" class="block">
-          <figure class="w-full aspect-square overflow-hidden cursor-pointer">
-            <img
-              class="w-full h-full object-cover"
-              [src]="
-                product.listingImages[0] ||
-                'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-              "
-              [alt]="product.name"
-            />
-          </figure>
-        </a>
-        <div class="card-body" style="padding: 0">
-          <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
-            <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
-          </a>
-          <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
-          <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
-        </div>
-      </div>
-      } } @empty {
-      <div class="text-center text-gray-500 w-full justify-center">
-        No hay productos disponibles en este momento.
-      </div>
-      }
     </div>
-    @if (firstRowProducts.length != 0) {
-    <div class="mt-8 flex justify-center">
-      <button class="btn btn-outline btn-primary" [routerLink]="['/categories/drawing']">Mostrar más</button>
+    } @else {
+    <div
+      class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
+    >
+      <a [routerLink]="['/products', product.slug]" class="block">
+        <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+          <img
+            class="w-full h-full object-cover"
+            [src]="
+              product.listingImages[0] ||
+              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
+            "
+            [alt]="product.name"
+          />
+        </figure>
+      </a>
+      <div class="card-body" style="padding: 0">
+        <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+          <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
+        </a>
+        <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+        <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
+      </div>
+    </div>
+    } } @empty {
+    <div class="text-center text-gray-500 w-full justify-center">
+      No hay productos disponibles en este momento.
     </div>
     }
   </div>
-  <h2 class="text-2xl font-bold text-center text-black my-6">Pintura</h2>
-  <div class="relative bg-white shadow-md rounded-xl p-6">
-    <div class="flex gap-4 overflow-x-auto hide-scrollbar">
-      @for (product of secondRowProducts; track $index) { @if ($index ==
-      secondRowProducts.length - 1) {
-      <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
-        <a [routerLink]="['/products', product.slug]" class="block">
-          <figure class="w-full aspect-square overflow-hidden cursor-pointer">
-            <img
-              class="w-full h-full object-cover"
-              [src]="
-                product.listingImages[0] ||
-                'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-              "
-              [alt]="product.name"
-            />
-          </figure>
+  @if (firstRowProducts.length != 0) {
+  <div class="mt-8 flex justify-center">
+    <button
+      class="btn btn-outline btn-primary"
+      [routerLink]="['/categories/drawing']"
+    >
+      Mostrar más
+    </button>
+  </div>
+  }
+</div>
+<h2 class="text-2xl font-bold text-center text-black my-6">Pintura</h2>
+<div class="relative bg-white shadow-md rounded-xl p-6">
+  <div class="flex gap-4 overflow-x-auto hide-scrollbar">
+    @for (product of secondRowProducts; track $index) { @if ($index ==
+    secondRowProducts.length - 1) {
+    <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
+      <a [routerLink]="['/products', product.slug]" class="block">
+        <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+          <img
+            class="w-full h-full object-cover"
+            [src]="
+              product.listingImages[0] ||
+              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
+            "
+            [alt]="product.name"
+          />
+        </figure>
+      </a>
+      <div class="card-body" style="padding: 0">
+        <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+          <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
         </a>
-        <div class="card-body" style="padding: 0">
-          <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
-            <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
-          </a>
-          <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
-          <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
-        </div>
+        <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+        <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
       </div>
-      } @else {
-      <div
-        class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
-      >
-        <a [routerLink]="['/products', product.slug]" class="block">
-          <figure class="w-full aspect-square overflow-hidden cursor-pointer">
-            <img
-              class="w-full h-full object-cover"
-              [src]="
-                product.listingImages[0] ||
-                'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-              "
-              [alt]="product.name"
-            />
-          </figure>
-        </a>
-        <div class="card-body" style="padding: 0">
-          <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
-            <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
-          </a>
-          <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
-          <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
-        </div>
-      </div>
-      } } @empty {
-      <div class="text-center text-gray-500 w-full justify-center">
-        No hay productos disponibles en este momento.
-      </div>
-      }
     </div>
-    @if (secondRowProducts.length != 0) {
-    <div class="mt-8 flex justify-center">
-      <button class="btn btn-outline btn-primary" [routerLink]="['/categories/painting']">Mostrar más</button>
+    } @else {
+    <div
+      class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
+    >
+      <a [routerLink]="['/products', product.slug]" class="block">
+        <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+          <img
+            class="w-full h-full object-cover"
+            [src]="
+              product.listingImages[0] ||
+              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
+            "
+            [alt]="product.name"
+          />
+        </figure>
+      </a>
+      <div class="card-body" style="padding: 0">
+        <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+          <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
+        </a>
+        <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+        <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
+      </div>
+    </div>
+    } } @empty {
+    <div class="text-center text-gray-500 w-full justify-center">
+      No hay productos disponibles en este momento.
     </div>
     }
   </div>
-  <h2 class="text-2xl font-bold text-center text-black my-6">Pinceles y brochas</h2>
-  <div class="relative bg-white shadow-md rounded-xl p-6">
-    <div class="flex gap-4 overflow-x-auto hide-scrollbar">
-      @for (product of thirdRowProducts; track $index) { @if ($index ==
-      thirdRowProducts.length - 1) {
-      <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
-        <a [routerLink]="['/products', product.slug]" class="block">
-          <figure class="w-full aspect-square overflow-hidden cursor-pointer">
-            <img
-              class="w-full h-full object-cover"
-              [src]="
-                product.listingImages[0] ||
-                'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-              "
-              [alt]="product.name"
-            />
-          </figure>
+  @if (secondRowProducts.length != 0) {
+  <div class="mt-8 flex justify-center">
+    <button
+      class="btn btn-outline btn-primary"
+      [routerLink]="['/categories/painting']"
+    >
+      Mostrar más
+    </button>
+  </div>
+  }
+</div>
+<h2 class="text-2xl font-bold text-center text-black my-6">
+  Pinceles y brochas
+</h2>
+<div class="relative bg-white shadow-md rounded-xl p-6">
+  <div class="flex gap-4 overflow-x-auto hide-scrollbar">
+    @for (product of thirdRowProducts; track $index) { @if ($index ==
+    thirdRowProducts.length - 1) {
+    <div class="bg-base-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4">
+      <a [routerLink]="['/products', product.slug]" class="block">
+        <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+          <img
+            class="w-full h-full object-cover"
+            [src]="
+              product.listingImages[0] ||
+              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
+            "
+            [alt]="product.name"
+          />
+        </figure>
+      </a>
+      <div class="card-body" style="padding: 0">
+        <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+          <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
         </a>
-        <div class="card-body" style="padding: 0">
-          <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
-            <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
-          </a>
-          <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
-          <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
-        </div>
+        <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+        <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
       </div>
-      } @else {
-      <div
-        class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
-      >
-        <a [routerLink]="['/products', product.slug]" class="block">
-          <figure class="w-full aspect-square overflow-hidden cursor-pointer">
-            <img
-              class="w-full h-full object-cover"
-              [src]="
-                product.listingImages[0] ||
-                'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
-              "
-              [alt]="product.name"
-            />
-          </figure>
-        </a>
-        <div class="card-body" style="padding: 0">
-          <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
-            <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
-          </a>
-          <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
-          <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
-        </div>
-      </div>
-      } } @empty {
-      <div class="text-center text-gray-500 w-full justify-center">
-        No hay productos disponibles en este momento.
-      </div>
-      }
     </div>
-    @if (thirdRowProducts.length != 0) {
-    <div class="mt-8 flex justify-center">
-      <button class="btn btn-outline btn-primary" [routerLink]="['/categories/brushes']">Mostrar más</button>
+    } @else {
+    <div
+      class="bg-base-100 border-r-2 border-gray-100 min-w-[221px] max-w-[221px] flex-shrink-0 pr-4"
+    >
+      <a [routerLink]="['/products', product.slug]" class="block">
+        <figure class="w-full aspect-square overflow-hidden cursor-pointer">
+          <img
+            class="w-full h-full object-cover"
+            [src]="
+              product.listingImages[0] ||
+              'https://www.cronobierzo.es/wp-content/uploads/2020/01/no-image.jpg'
+            "
+            [alt]="product.name"
+          />
+        </figure>
+      </a>
+      <div class="card-body" style="padding: 0">
+        <a [routerLink]="['/products', product.slug]" class="cursor-pointer">
+          <h2 class="card-title hover:text-primary">{{ product.name }}</h2>
+        </a>
+        <p class="text-sm text-indigo-600">{{ product.brandName }}</p>
+        <p class="text-lg font-semibold text-primary">{{ product.price }}€</p>
+      </div>
+    </div>
+    } } @empty {
+    <div class="text-center text-gray-500 w-full justify-center">
+      No hay productos disponibles en este momento.
     </div>
     }
   </div>
+  @if (thirdRowProducts.length != 0) {
+  <div class="mt-8 flex justify-center">
+    <button
+      class="btn btn-outline btn-primary"
+      [routerLink]="['/categories/brushes']"
+    >
+      Mostrar más
+    </button>
+  </div>
+  }
 </div>
