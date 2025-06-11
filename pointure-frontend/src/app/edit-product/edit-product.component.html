@@ -2,31 +2,36 @@
   class="min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
 >
   <div class="w-full max-w-3xl p-8 rounded-xl shadow-lg bg-white z-20">
-    <h2 class="text-2xl font-bold text-center mb-6">Crear Producto</h2>
+    <h2 class="text-2xl font-bold text-center mb-6">Editar Producto</h2>
 
+    @if (isLoading) {
+    <div class="fixed inset-0 flex items-center justify-center z-50">
+      <div
+        class="animate-spin w-16 h-16 border-4 border-primary border-t-transparent rounded-full"
+      ></div>
+    </div>
+    } @else {
     <!-- Image Upload Section -->
     <div
       class="mb-6 flex overflow-x-auto space-x-4 p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)] rounded-2xl bg-gray-100 hide-scrollbar"
     >
       @for (image of imagePreviews; track $index) {
-      <ng-container>
-        <div
-          class="relative w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden shadow-inner bg-white flex items-center justify-center"
+      <div
+        class="relative w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden shadow-inner bg-white flex items-center justify-center"
+      >
+        <img
+          [src]="image"
+          alt="Product Image"
+          class="object-cover w-full h-full"
+        />
+        <button
+          (click)="removeImage($index)"
+          class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md transition"
+          title="Eliminar"
         >
-          <img
-            [src]="image"
-            alt="Product Image"
-            class="object-cover w-full h-full"
-          />
-          <button
-            (click)="removeImage($index)"
-            class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md transition"
-            title="Eliminar"
-          >
-            ✕
-          </button>
-        </div>
-      </ng-container>
+          ✕
+        </button>
+      </div>
       } @if (imagePreviews.length < maxImages) {
       <label
         class="w-32 h-32 flex-shrink-0 flex items-center justify-center rounded-xl bg-gray-300 border-2 border-gray-400 hover:bg-gray-400 text-white cursor-pointer shadow-inner transition duration-200"
@@ -88,7 +93,7 @@
             (productForm.get('name')?.errors?.['minlength']) { El nombre debe
             tener al menos 3 caracteres. } @else if
             (productForm.get('name')?.errors?.['maxlength']) { El nombre no debe
-            exceder los 100 caracteres. }}
+            exceder los 100 caracteres. } }
           </div>
         </div>
 
@@ -211,8 +216,9 @@
         class="btn btn-primary w-full rounded-full"
         [disabled]="productForm.invalid"
       >
-        Crear Producto
+        Actualizar Producto
       </button>
     </form>
+    }
   </div>
 </div>
