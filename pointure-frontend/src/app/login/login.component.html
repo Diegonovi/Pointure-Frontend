@@ -13,6 +13,15 @@
       -webkit-backdrop-filter: blur(20px);
     "
   >
+
+   @if (errorMessage) {
+    <div class="mb-4 border-2 border-red-500 rounded-full p-4 pb-0 bg-red-200">
+      <p class="text-red-500 text-sm mb-4 text-center">
+        {{ errorMessage }}
+      </p>
+    </div>
+      }
+
     <div class="flex justify-center mb-6">
       <img src="assets/logo_black.png" alt="Pointure Logo" class="h-10" />
     </div>
@@ -49,12 +58,6 @@
         </p>
         }
       </div>
-
-      @if (errorMessage) {
-      <p class="text-red-500 text-sm mb-4">
-        {{ errorMessage }}
-      </p>
-      }
 
       <button
         type="submit"

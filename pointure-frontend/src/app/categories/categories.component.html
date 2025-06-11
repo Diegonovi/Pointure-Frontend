@@ -1,0 +1,28 @@
+<div class="max-w-7xl mx-auto px-4 py-12">
+  <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+    Categorías
+  </h1>
+  <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10">
+    Explora todas nuestras categorías de materiales y herramientas artísticas. Desde técnicas tradicionales hasta medios digitales, aquí encuentras lo que necesitas para crear sin límites.
+  </p>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+    @for (category of categories; track category.id) {
+      <a
+        [routerLink]="'/category/' + category.route"
+        class="relative h-40 rounded-xl overflow-hidden text-white group cursor-pointer transition-transform hover:scale-[1.02]"
+        [ngClass]="getColorClasses(category.id)"
+      >
+        <div class="flex items-center justify-center h-full text-center px-2 text-base font-semibold">
+          {{ category.name }}
+        </div>
+        <div
+          class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4 text-sm leading-tight"
+        >
+          {{ category.description }}
+        </div>
+      </a>
+    }
+  </div>
+</div>
+

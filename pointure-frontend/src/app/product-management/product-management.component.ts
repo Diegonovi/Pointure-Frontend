@@ -57,7 +57,7 @@ export class ProductManagementComponent implements OnInit {
         false
       );
       this.products = this.page.data;
-      this.totalPages = this.page.totalPages;
+      this.totalPages = this.page.totalPages == 0 ? 1 : this.page.totalPages;
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {
@@ -102,7 +102,7 @@ export class ProductManagementComponent implements OnInit {
   updatePriceSorting(event: Event) {
     const select = event.target as HTMLSelectElement;
     this.filters.priceSortingDirection = select.value as 'asc' | 'desc';
-    this.applyFilters(); // apply immediately on sort
+    this.applyFilters();
   }
 }
 

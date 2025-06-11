@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { firstValueFrom, Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 import { Product } from '../models/Product';
 import { Page } from '../models/Page';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +17,7 @@ import { Page } from '../models/Page';
 export class ProductService {
   private baseUrl = environment.baseUrl + environment.products;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   async getProducts(
     pageNumber: number = 1,
@@ -64,6 +70,23 @@ export class ProductService {
     } catch (error) {
       console.error('Failed to fetch product', error);
       return null;
+    }
+  }
+
+  async createProduct(formData: FormData): Promise<Product> {
+    try {
+      const token = this.authService.getToken();
+
+      const headers = token
+        ? new HttpHeaders({ Authorization: `Bearer ${token}` })
+        : new HttpHeaders();
+
+      return await firstValueFrom(
+        this.http.post<Product>(`${this.baseUrl}/insert`, formData, { headers })
+      );
+    } catch (error) {
+      console.error('Error creating product', error);
+      throw error;
     }
   }
 }
