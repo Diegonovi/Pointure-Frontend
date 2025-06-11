@@ -16,7 +16,9 @@ export class NavbarComponent {
   onSearchSubmit(event: Event) {
     event.preventDefault();
     if (this.searchQuery.trim()) {
-      this.router.navigate(['/search', this.searchQuery.trim()]);
+      this.router.navigate(['/search', this.searchQuery.trim()]).then(() => {
+        window.location.reload();
+      });
     }
   }
 }
