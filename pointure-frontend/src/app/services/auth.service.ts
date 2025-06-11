@@ -43,7 +43,7 @@ export class AuthService {
 
   logout(): void {
     this.cookieService.delete(this.tokenKey, '/');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {

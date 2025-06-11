@@ -20,6 +20,26 @@
         <option value="desc">Mayor a Menor</option>
       </select>
     </div>
+
+    <button
+      class="ml-6 inline-flex items-center justify-center py-2 bg-green-200 border-2 border-green-600 text-green-700 rounded-full hover:bg-green-600 hover:text-white transition"
+      style="padding-left: 0.65rem; padding-right: 0.65rem"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 5v14M5 12h14"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
   </div>
 </div>
 
@@ -60,7 +80,10 @@
 
       <!-- Category Filter -->
       <div class="mb-4">
-        <label for="category" class="block mb-2 font-semibold text-sm text-gray-700">
+        <label
+          for="category"
+          class="block mb-2 font-semibold text-sm text-gray-700"
+        >
           Filtrar por Categoría
         </label>
         <select
@@ -71,9 +94,9 @@
         >
           <option [ngValue]="null">Seleccione una categoría</option>
           @for (category of categories; track category.id) {
-            <option [ngValue]="category.id">
-              {{ category.name }}
-            </option>
+          <option [ngValue]="category.id">
+            {{ category.name }}
+          </option>
           }
         </select>
       </div>
@@ -115,18 +138,18 @@
     <!-- Product List with Spinner and Empty State -->
     <div class="min-h-[200px] relative">
       <!-- Loading Spinner -->
-       @if (loading) {
-        <div
+      @if (loading) {
+      <div
         class="absolute inset-0 flex items-center justify-center rounded-2xl bg-white z-10"
       >
         <div
           class="animate-spin w-16 h-16 border-4 border-primary border-t-transparent rounded-full"
         ></div>
       </div>
-       }
+      }
 
       <!-- Product Grid -->
-       @if (!loading && products.length) {
+      @if (!loading && products.length) {
       <div
         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-white p-4 py-8 rounded-2xl shadow-sm"
       >
@@ -164,7 +187,7 @@
         </div>
         }
       </div>
-        }
+      }
       <!-- No Results Message -->
       <div
         class="absolute inset-0 flex items-center justify-center rounded-2xl bg-white z-10"

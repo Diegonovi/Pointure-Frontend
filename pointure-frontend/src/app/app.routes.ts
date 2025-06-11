@@ -6,6 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { LoginGuard } from './guards/login.guard';
+import { CreateProductComponent } from './create-product.component/create-product.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,7 @@ export const routes: Routes = [
         },
       },
       { path: 'dashboard', component: ProductManagementComponent, canActivate : [LoginGuard] },
+      { path: 'product-create', component: CreateProductComponent, canActivate : [LoginGuard] },
     ],
   },
   {
