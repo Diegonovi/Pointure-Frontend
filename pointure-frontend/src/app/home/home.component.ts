@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/products.service';
 import { Product } from '../models/Product';
 import { Page } from '../models/Page';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -13,7 +12,9 @@ import { RouterLink } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  products: Product[] = [];
+  firstRowProducts: Product[] = [];
+  secondRowProducts: Product[] = [];
+  thirdRowProducts: Product[] = [];
   pageNumber = 1;
   pageSize = 30;
   totalPages = 0;
@@ -21,17 +22,12 @@ export class HomeComponent implements OnInit {
   constructor(private productService: ProductService, private cdRef: ChangeDetectorRef) { }
 
   async ngOnInit(): Promise<void> {
-    this.products = (await this.productService.getProducts(1, 10, '', 10)).data;
+    let page: Page<Product> = await this.productService.getProducts(1, 10, '', 10);
+    this.firstRowProducts = page.data;
+    page = await this.productService.getProducts(1, 10, '', 20);
+    this.secondRowProducts = page.data;
+    page = await this.productService.getProducts(1, 10, '', 40);
+    this.thirdRowProducts = page.data;
     this.cdRef.detectChanges();
   }
-
-  loadProducts(): void {
-    this.productService.getProducts(this.pageNumber, this.pageSize).then((page: Page<Product>) => {
-      this.products = page.data;
-      this.totalPages = page.totalPages;
-    }).catch(error => {
-      console.error("Failed to load products", error);
-    });
-  }
-
 }
