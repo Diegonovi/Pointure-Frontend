@@ -15,10 +15,16 @@
       <!-- Logo & Description -->
       <div class="text-center lg:text-left">
         <a href="/">
-          <img src="assets/logo_black.png" alt="Pointure Logo" class="h-10 mx-auto lg:mx-0 mb-2" />
+          <img
+            src="assets/logo_black.png"
+            alt="Pointure Logo"
+            class="h-10 mx-auto lg:mx-0 mb-2"
+          />
         </a>
         <p class="text-sm text-black/80 max-w-sm">
-          Pointure brings you the best in shoes, style, and comfort. Explore our catalog or get in touch!
+          Pointure te ofrece lo mejor en materiales de arte, creatividad y
+          expresión. Descubre nuestro catálogo y encuentra todo lo que necesitas
+          para tus proyectos artísticos.
         </p>
       </div>
 
@@ -32,12 +38,26 @@
       <!-- Admin Login Message -->
       <div class="text-center sm:text-right">
         <p class="text-sm text-black/80 mb-2">¿Eres administrador?</p>
-        <a
-          href="/login"
-          class="inline-block px-4 py-2 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition"
-        >
-          Inicia sesión
-        </a>
+
+        @if (isLoggedIn) {
+        <div>
+          <button
+            (click)="logout()"
+            class="inline-block px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-full hover:bg-red-600 transition"
+          >
+            Cerrar sesión
+          </button>
+        </div>
+        } @else {
+        <div>
+          <a
+            href="/login"
+            class="inline-block px-4 py-2 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition"
+          >
+            Inicia sesión
+          </a>
+        </div>
+        }
       </div>
     </div>
 
