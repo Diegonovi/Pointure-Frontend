@@ -58,6 +58,15 @@ export const routes: Routes = [
         component: CreateProductComponent,
         canActivate: [LoginGuard],
       },
+      {
+        path: 'products/update/:slug',
+        loadComponent: () =>
+          import('./edit-product/edit-product.component').then((m) => m.EditProductComponent),
+        data: {
+          renderMode: 'client',
+        },
+        canActivate: [LoginGuard],
+      },
     ],
   },
   {

@@ -89,4 +89,21 @@ export class ProductService {
       throw error;
     }
   }
+
+  async updateProduct(formData: FormData): Promise<Product> {
+    try {
+      const token = this.authService.getToken();
+
+      const headers = token
+        ? new HttpHeaders({ Authorization: `Bearer ${token}` })
+        : new HttpHeaders();
+
+      return await firstValueFrom(
+        this.http.put<Product>(`${this.baseUrl}/update`, formData, { headers })
+      );
+    } catch (error) {
+      console.error('Error updating product', error);
+      throw error;
+    }
+  }
 }

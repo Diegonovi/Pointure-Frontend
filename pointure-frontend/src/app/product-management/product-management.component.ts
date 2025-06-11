@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-product-management',
   standalone: true,
   templateUrl: './product-management.component.html',
-  imports: [RouterLink, NgStyle, NgIf, NgFor, FormsModule]
+  imports: [RouterLink, NgStyle, NgIf, FormsModule]
 })
 export class ProductManagementComponent implements OnInit {
   page: Page<Product> | null = null;
