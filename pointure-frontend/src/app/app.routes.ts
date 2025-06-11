@@ -31,6 +31,16 @@ export const routes: Routes = [
           renderMode: 'client',
         },
       },
+      {
+        path: 'search/:query',
+        loadComponent: () =>
+          import('./search/search.component').then(
+            (m) => m.SearchComponent
+          ),
+        data: {
+          renderMode: 'client',
+        },
+      },
     ],
   },
   {
