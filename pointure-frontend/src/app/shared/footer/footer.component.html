@@ -30,15 +30,18 @@
 
       <!-- Footer Nav Links -->
       <div class="flex flex-col sm:flex-row gap-4 text-center lg:text-left">
-        <a href="/" class="text-black hover:underline">Home</a>
-        <a href="/about" class="text-black hover:underline">About</a>
-        <a href="/contact" class="text-black hover:underline">Contact</a>
+        <a href="/" class="text-black hover:underline">Inicio</a>
+        <a href="/about" class="text-black hover:underline">Acerca de</a>
+        <a href="/categories" class="text-black hover:underline">Categorías</a>
+        @if (isLoggedIn){
+        <a href="/dashboard" class="text-indigo-800 hover:underline"
+          >Gestión de Productos</a
+        >
+        }
       </div>
 
       <!-- Admin Login Message -->
       <div class="text-center sm:text-right">
-        <p class="text-sm text-black/80 mb-2">¿Eres administrador?</p>
-
         @if (isLoggedIn) {
         <div>
           <button
@@ -49,12 +52,13 @@
           </button>
         </div>
         } @else {
+        <p class="text-sm text-black/80 mb-2">¿Eres administrador?</p>
         <div>
           <a
             href="/login"
             class="inline-block px-4 py-2 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition"
           >
-            Inicia sesión
+            Iniciar sesión
           </a>
         </div>
         }
