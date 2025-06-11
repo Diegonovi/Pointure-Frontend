@@ -4,6 +4,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductManagementComponent } from './product-management/product-management.component';
+import { LoginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
   {
@@ -41,6 +43,7 @@ export const routes: Routes = [
           renderMode: 'client',
         },
       },
+      { path: 'dashboard', component: ProductManagementComponent, canActivate : [LoginGuard] },
     ],
   },
   {

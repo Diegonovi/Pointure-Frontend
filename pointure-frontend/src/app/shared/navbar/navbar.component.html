@@ -1,4 +1,4 @@
-<div class="relative z-10" style="padding: 1.5rem;">
+<div class="relative z-10" style="padding: 1.5rem">
   <!-- Glow Layer -->
   <div class="radial-glow-left hidden md:block"></div>
   <div class="radial-glow-center md:hidden"></div>
@@ -43,22 +43,45 @@
 
       <!-- Desktop Nav Links -->
       <div class="hidden lg:flex space-x-4">
-        <a href="/" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">Home</a>
-        <a href="/products" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">Products</a>
-        <a href="/about" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">About</a>
-        <a href="/contact" class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70">Contact</a>
+        <a
+          href="/"
+          class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70"
+          >Home</a
+        >
+        <a
+          href="/products"
+          class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70"
+          >Products</a
+        >
+        <a
+          href="/about"
+          class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70"
+          >About</a
+        >
+        <a
+          href="/contact"
+          class="text-sm px-4 py-2 rounded-full transition hover:bg-white/70"
+          >Contact</a
+        >
       </div>
     </div>
 
-    <input
-      type="text"
-      placeholder="Search"
-      class="hidden lg:block input rounded-4xl w-80 focus:outline-none focus:ring-0"
-    />
+    <form (submit)="onSearchSubmit($event)" class="hidden lg:block">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        name="search"
+        placeholder="Search"
+        class="input rounded-4xl w-80 focus:outline-none focus:ring-0"
+      />
+    </form>
   </div>
 
   <!-- Mobile Nav Links -->
-  <div id="mobile-menu" class="lg:hidden hidden shadow-md bg-white-100 relative z-10">
+  <div
+    id="mobile-menu"
+    class="lg:hidden hidden shadow-md bg-white-100 relative z-10"
+  >
     <div
       class="bg-base-100 rounded-box shadow-md mt-2 w-full max-w-screen-xl mx-auto px-4 py-6 space-y-2"
     >
