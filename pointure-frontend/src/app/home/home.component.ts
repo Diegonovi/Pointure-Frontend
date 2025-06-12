@@ -2,15 +2,16 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/products.service';
 import { Product } from '../models/Product';
 import { Page } from '../models/Page';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   imports: [RouterLink],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+
   firstRowProducts: Product[] = [];
   secondRowProducts: Product[] = [];
   thirdRowProducts: Product[] = [];
@@ -20,35 +21,20 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cdRef: ChangeDetectorRef,
-    private router: Router
-  ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    this.router.events.subscribe(async (event) => {
-      if (event instanceof NavigationEnd) {
-        await this.loadProducts();
-      }
-    });
+    await this.loadProducts();
+    this.cdRef.detectChanges();
   }
 
-  async loadProducts() {
-    let page: Page<Product> = await this.productService.getProducts(
-      1,
-      10,
-      '',
-      10
-    );
+  async loadProducts(){
+    let page: Page<Product> = await this.productService.getProducts(1, 10, '', 10);
     this.firstRowProducts = page.data;
-
     page = await this.productService.getProducts(1, 10, '', 20);
     this.secondRowProducts = page.data;
-
     page = await this.productService.getProducts(1, 10, '', 40);
     this.thirdRowProducts = page.data;
-
-    this.cdRef.detectChanges();
   }
 }

@@ -4,6 +4,7 @@ import { ProductService } from '../services/products.service';
 import { Product } from '../models/Product';
 import { FlashMessageService } from '../services/flashmessage.service';
 import { AuthService } from '../services/auth.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-detail.component',
@@ -42,6 +43,7 @@ export class ProductDetailComponent implements OnInit {
       this.router.navigate(['/404']);
     }
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.showDeleteModal = false;
     this.cdRef.detectChanges();
   }
 
@@ -72,7 +74,17 @@ export class ProductDetailComponent implements OnInit {
       this.flashMessageService.setMessage('Producto eliminado correctamente');
       this.router.navigate(['/dashboard']);
     } catch (error) {
-      console.error('Error eliminando el producto:', error);
+      if (error instanceof HttpErrorResponse && error.status === 401) {
+        this.flashMessageService.setMessage(
+          'Su sesión ha expirado, por favor inicie sesión de nuevo'
+        );
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      } else {
+        console.error('Error updating product:', error);
+        this.flashMessageService.setMessage('Error updating product');
+      }
     }
+    this.showDeleteModal = false;
   }
 }
