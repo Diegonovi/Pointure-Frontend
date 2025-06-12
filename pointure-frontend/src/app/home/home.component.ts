@@ -20,11 +20,13 @@ export class HomeComponent implements OnInit {
   totalPages = 0;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   async ngOnInit(): Promise<void> {
     await this.loadProducts();
+    this.cdRef.detectChanges();
   }
 
   async loadProducts(){
