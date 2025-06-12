@@ -98,6 +98,8 @@ export class CreateProductComponent implements OnInit {
     reader.readAsDataURL(file);
 
     event.target.value = '';
+
+    console.log(this.imageFiles);
   }
 
   removeImage(index: number) {
