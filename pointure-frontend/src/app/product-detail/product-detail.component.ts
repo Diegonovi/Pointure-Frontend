@@ -47,10 +47,6 @@ export class ProductDetailComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  enableDeleteModal() {
-    this.showDeleteModal = true;
-  }
-  
   async loadProduct(slug: string) {
     this.product = await this.productService.getProductBySlug(slug);
     if (!this.product || this.product.isDeleted) {
