@@ -76,12 +76,6 @@ export class CreateProductComponent implements OnInit {
   }
 
   addImage(event: any) {
-    if (
-      this.imageFiles.length + (this.imagePreviews?.length || 0) >=
-      this.maxImages
-    )
-      return;
-
     const file = event.target.files[0];
     if (!file) return;
 
