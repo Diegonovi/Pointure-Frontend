@@ -17,6 +17,10 @@ export const serverRoutes: ServerRoute[] = [
     path: 'search/:query',
     renderMode: RenderMode.Client,
   },
+   {
+    path: '',
+    renderMode: RenderMode.Prerender,
+  },
   {
     path: 'home',
     renderMode: RenderMode.Client,
