@@ -157,6 +157,9 @@ export class CreateProductComponent implements OnInit {
       this.imagePreviews = [];
       this.imageFiles = [];
       this.selectedColors = [];
+      this.flashMessageService.setMessage(
+        'Producto creado exitosamente'
+      );
       this.router.navigate(['/products', product.slug]);
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 401) {

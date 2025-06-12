@@ -2,27 +2,34 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductService } from '../services/products.service';
 import { Product } from '../models/Product';
+import { FlashMessageService } from '../services/flashmessage.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-product-detail.component',
   imports: [RouterLink],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.css'
+  styleUrl: './product-detail.component.css',
 })
-
 export class ProductDetailComponent implements OnInit {
-   product: Product | null = null;
+  product: Product | null = null;
   notFound = false;
 
-  selectedImage : string = '';
+  showDeleteModal = false;
+  selectedImage: string = '';
+  successMessage: string | null = null;
+  isLoggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private flashMessageService: FlashMessageService,
+    private authService: AuthService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.successMessage = this.flashMessageService.getMessage();
   }
 
   public products: Product[] = [];
@@ -34,11 +41,13 @@ export class ProductDetailComponent implements OnInit {
     } else {
       this.router.navigate(['/404']);
     }
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.cdRef.detectChanges();
   }
 
   async loadProduct(slug: string) {
-    this.product = await this.productService.getProductBySlug(slug);    if (!this.product) {
+    this.product = await this.productService.getProductBySlug(slug);
+    if (!this.product) {
       this.router.navigate(['/404']);
     } else {
       this.selectedImage = this.product.listingImages[0];
@@ -48,8 +57,22 @@ export class ProductDetailComponent implements OnInit {
 
   async loadSimilarProducts() {
     if (this.product) {
-      this.products = (await this.productService.getProducts(1, 10, '', this.product.category)).data;
-      this.products = this.products.filter(p => p.id !== this.product!.id);
+      this.products = (
+        await this.productService.getProducts(1, 10, '', this.product.category)
+      ).data;
+      this.products = this.products.filter((p) => p.id !== this.product!.id);
+    }
+  }
+
+  async deleteProduct() {
+    if (!this.product) return;
+
+    try {
+      await this.productService.deleteProduct(this.product.id);
+      this.flashMessageService.setMessage('Producto eliminado correctamente');
+      this.router.navigate(['/dashboard']);
+    } catch (error) {
+      console.error('Error eliminando el producto:', error);
     }
   }
 }
