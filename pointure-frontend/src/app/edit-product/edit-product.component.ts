@@ -91,7 +91,7 @@ export class EditProductComponent implements OnInit {
         this.productId
       );
 
-      if (!product) {
+      if (!product || product.isDeleted) {
         this.router.navigate(['/404']);
         return;
       }

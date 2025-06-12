@@ -47,7 +47,7 @@ export class ProductDetailComponent implements OnInit {
 
   async loadProduct(slug: string) {
     this.product = await this.productService.getProductBySlug(slug);
-    if (!this.product) {
+    if (!this.product || this.product.isDeleted) {
       this.router.navigate(['/404']);
     } else {
       this.selectedImage = this.product.listingImages[0];

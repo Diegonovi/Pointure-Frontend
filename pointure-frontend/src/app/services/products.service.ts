@@ -36,8 +36,6 @@ export class ProductService {
       .set('brandName', brandName)
       .set('includeDeleted', includeDeleted.toString());
 
-    console.log('Fetching products with params:', {params});
-
     if (categoryId !== undefined && categoryId !== null) {
       params = params.set('categoryId', categoryId.toString());
     }
