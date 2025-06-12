@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.activatedRoute.url.subscribe(() => {
-      this.loadProducts();
+    await this.activatedRoute.url.subscribe(async () => {
+      await this.loadProducts();
     });
     this.cdRef.detectChanges();
   }
