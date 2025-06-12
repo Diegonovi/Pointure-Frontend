@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/products.service';
 import { Product } from '../models/Product';
 import { Page } from '../models/Page';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,12 +22,20 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cdRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   async ngOnInit(): Promise<void> {
+    this.activatedRoute.url.subscribe(() => {
+      this.loadProducts();
+    });
+    this.cdRef.detectChanges();
+  }
+
+  async loadProducts(){
     let page: Page<Product> = await this.productService.getProducts(1, 10, '', 10);
     this.firstRowProducts = page.data;
     page = await this.productService.getProducts(1, 10, '', 20);
