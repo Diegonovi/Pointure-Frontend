@@ -20,19 +20,11 @@ export class HomeComponent implements OnInit {
   totalPages = 0;
 
   constructor(
-    private productService: ProductService,
-    private cdRef: ChangeDetectorRef,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+    private productService: ProductService
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    await this.activatedRoute.url.subscribe(async () => {
-      await this.loadProducts();
-    });
-    this.cdRef.detectChanges();
+    await this.loadProducts();
   }
 
   async loadProducts(){
@@ -42,6 +34,5 @@ export class HomeComponent implements OnInit {
     this.secondRowProducts = page.data;
     page = await this.productService.getProducts(1, 10, '', 40);
     this.thirdRowProducts = page.data;
-    this.cdRef.detectChanges();
   }
 }
