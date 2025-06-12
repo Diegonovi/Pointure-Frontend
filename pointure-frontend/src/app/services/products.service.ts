@@ -36,6 +36,8 @@ export class ProductService {
       .set('brandName', brandName)
       .set('includeDeleted', includeDeleted.toString());
 
+    console.log('Fetching products with params:', {params});
+
     if (categoryId !== undefined && categoryId !== null) {
       params = params.set('categoryId', categoryId.toString());
     }
@@ -43,7 +45,7 @@ export class ProductService {
       params = params.set('priceSortingDirection', priceSortingDirection);
     }
     if (colorIds.length) {
-      params = params.set('colors', colorIds.join(',')); // Convert array to comma-separated values
+      params = params.set('colors', colorIds.join(','));
     }
 
     try {
@@ -103,6 +105,23 @@ export class ProductService {
       );
     } catch (error) {
       console.error('Error updating product', error);
+      throw error;
+    }
+  }
+
+  async deleteProduct(productId: string): Promise<void> {
+    try {
+      const token = this.authService.getToken();
+
+      const headers = token
+        ? new HttpHeaders({ Authorization: `Bearer ${token}` })
+        : new HttpHeaders();
+
+      await firstValueFrom(
+        this.http.delete(`${this.baseUrl}/${productId}`, { headers })
+      );
+    } catch (error) {
+      console.error('Error deleting product', error);
       throw error;
     }
   }

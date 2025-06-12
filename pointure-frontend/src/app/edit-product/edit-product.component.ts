@@ -227,7 +227,7 @@ export class EditProductComponent implements OnInit {
 
     try {
       const updatedProduct = await this.productService.updateProduct(formData);
-      this.flashMessageService.setMessage('Product updated successfully');
+      this.flashMessageService.setMessage('Producto actualizado correctamente');
       this.router.navigate(['/products', updatedProduct.slug]);
     } catch (error) {
       if (error instanceof HttpErrorResponse && error.status === 401) {

@@ -6,13 +6,14 @@ import { Page } from '../models/Page';
 import { COLORS } from '../data/Colors';
 import { CATEGORIES } from '../data/Categories';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { FlashMessageService } from '../services/flashmessage.service';
 
 @Component({
   selector: 'app-product-management',
   standalone: true,
   templateUrl: './product-management.component.html',
-  imports: [RouterLink, NgStyle, NgIf, FormsModule]
+  imports: [RouterLink, NgStyle, NgIf, FormsModule],
 })
 export class ProductManagementComponent implements OnInit {
   page: Page<Product> | null = null;
@@ -23,23 +24,26 @@ export class ProductManagementComponent implements OnInit {
   currentPage = 1;
   totalPages = 0;
   loading = false;
+  successMessage: string | null = null;
 
   filters = {
     name: '',
     brandName: '',
     colors: [] as number[],
     categoryId: null as number | null,
-    priceSortingDirection: null as 'asc' | 'desc' | null
+    priceSortingDirection: null as 'asc' | 'desc' | null,
   };
 
   constructor(
     private router: Router,
     private productService: ProductService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private flashMessageService: FlashMessageService
   ) {}
 
   async ngOnInit() {
     await this.fetchProducts();
+    this.successMessage = this.flashMessageService.getMessage();
     this.cdRef.detectChanges();
   }
 
@@ -67,9 +71,9 @@ export class ProductManagementComponent implements OnInit {
   }
 
   updateCategory(newCategoryCode: number | null) {
-     this.filters.categoryId = newCategoryCode;
+    this.filters.categoryId = newCategoryCode;
   }
-  
+
   async applyFilters() {
     this.currentPage = 1;
     await this.fetchProducts();
@@ -105,4 +109,3 @@ export class ProductManagementComponent implements OnInit {
     this.applyFilters();
   }
 }
-
