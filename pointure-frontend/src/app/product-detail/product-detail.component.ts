@@ -43,9 +43,14 @@ export class ProductDetailComponent implements OnInit {
       this.router.navigate(['/404']);
     }
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.showDeleteModal = false;
     this.cdRef.detectChanges();
   }
 
+  enableDeleteModal() {
+    this.showDeleteModal = true;
+  }
+  
   async loadProduct(slug: string) {
     this.product = await this.productService.getProductBySlug(slug);
     if (!this.product || this.product.isDeleted) {
@@ -84,5 +89,6 @@ export class ProductDetailComponent implements OnInit {
         this.flashMessageService.setMessage('Error updating product');
       }
     }
+    this.showDeleteModal = false;
   }
 }
